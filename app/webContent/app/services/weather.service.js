@@ -11,8 +11,8 @@
         /**
          * @name app.service:weatherService#searchMeteoTweets
          */
-        function getWeather(city) {
-            return $http.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${TOKEN}`);
+        function getWeather(latitude, longitude) {
+            return $http.get(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${TOKEN}&units=metric`);
         }
 
         /*

@@ -2,19 +2,23 @@
     Interactive french map
 </div>
 <div style="width : 800px;height: 400px;">
-    <ui-gmap-google-map
-            center='vm.map.center'
-            zoom='vm.map.zoom' ,
-            events="vm.map.events"
-    ></ui-gmap-google-map>
+    <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events"></ui-gmap-google-map>
 </div>
 
 <md-card class="userWeatherCard">
     <!--<img src="card-image.png" class="md-card-image" alt="image caption">-->
     <md-card-content>
-        <h2>City</h2>
+        <h2>{{vm.userWeather.name}}<img src="http://openweathermap.org/img/w/{{vm.userWeather.weather[0].icon}}.png"></h2>
         <div>
-            {{vm.userWeather}}
+            <div>
+                <span></span>
+            </div>
+            <div>
+                Cloudiness (%) : {{vm.userWeather.clouds.all}}
+            </div>
+            <div>Weather : {{vm.userWeather.weather[0].description}}</div>
+            <div>Temperature : {{vm.userWeather.main.temp}}</div>
+
         </div>
     </md-card-content>
     <md-card-footer>
@@ -25,7 +29,6 @@
 <div tweets hashtag="toulouse" button="true" count="15" refresh="15"/>
 
 <md-card class="selectedCityCard">
-    <!--<img src="card-image.png" class="md-card-image" alt="image caption">-->
     <md-card-content>
         <h2>City</h2>
         <div>
@@ -40,13 +43,12 @@
 </md-card>
 
 <md-card class="tweetCards" ng-repeat="tweet in vm.tweets | limitTo : 5">
-    <!--<img src="card-image.png" class="md-card-image" alt="image caption">-->
     <md-card-content>
         <h2>Tweet</h2>
         <div>
             <div>{{tweet.created_at}}</div>
             <div>
-                <span ng-repeat="tag in tweet.entities.hashtags">{{tag.text}}</span>
+                <span ng-repeat="tag in tweet.entities.hashtags">#{{tag.text}}</span>
             </div>
             <div>{{tweet.text}}</div>
     </md-card-content>

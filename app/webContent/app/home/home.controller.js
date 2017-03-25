@@ -2,22 +2,20 @@
     'use strict';
     angular.module('app.home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['uiGmapGoogleMapApi', '$scope', 'twitterService', 'userWeather'];
-    function HomeController(uiGmapGoogleMapApi, $scope, twitterService, userWeather) {
+    HomeController.$inject =
+        ['googleMap', '$scope', 'twitterService', 'userWeather', 'weatherService', 'toulouseCoordinates', 'biggestCitiesWeather'];
+    function HomeController(googleMap, $scope, twitterService, userWeather, weatherService, toulouseCoordinates, biggestCitiesWeather) {
         const vm = this;
         const init = () => {
 
+            console.log(biggestCitiesWeather);
+
             vm.userWeather = userWeather.data;
+            vm.googleMap = googleMap;
 
-
-            const toulouseCoordinates = {
-                latitude: 43.6047,
-                longitude: 1.442
-            };
             const events = {
                 click: clickMapEvent
             };
-
 
             vm.map = {
                 center: toulouseCoordinates,
@@ -28,62 +26,17 @@
 
         init();
 
-        uiGmapGoogleMapApi.then(function (maps) {
-            vm.maps = maps;
-        });
 
-        // GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP// GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP
-        // GET WEATHER FROM GMAP
-
-
+        //noinspection JSUnusedLocalSymbols
         function clickMapEvent(map, eventName, event) {
             const mouseEvent = event[0];
             const latitude = mouseEvent.latLng.lat();
             const longitude = mouseEvent.latLng.lng();
 
-            const latlng = new vm.maps.LatLng(latitude, longitude);
-            const geocoder = new vm.maps.Geocoder();
-            geocoder.geocode({'latLng': latlng}, function (results, status) {
+            const latitudeLongitude = new vm.googleMap.LatLng(latitude, longitude);
+            const geocoder = new vm.googleMap.Geocoder();
 
-                if (results) {
-                    const addressComponents = results[0].address_components;
-                    const formattedAddress = results[0].formatted_address;
-                    const coordinates = {
-                        latitude: results[0].geometry.location.lat(),
-                        longitude: results[0].geometry.location.lng()
-                    };
-                    let city;
-                    for (const addressComponent of addressComponents) {
-                        if (addressComponent.types && addressComponent.types.indexOf('locality') > -1) {
-                            city = addressComponent.long_name;
-                            break;
-                        }
-                    }
-
-                    vm.selectedCity = {
-                        city: city,
-                        address: formattedAddress,
-                        coordinates: coordinates
-                    };
-
-                    twitterService.searchMeteoTweets(city).then(result => {
-                        if (result.data) {
-                            vm.tweets = result.data.statuses;
-                        }
-                    });
-
-                    // Since Google Map's SDK events are fired outside the scope of the Angular application, a call to $apply is necessary to trigger
-                    // dirty checking
-                    $scope.$apply();
-
-                }
-
-            });
+            geocoder.geocode({'latLng': latitudeLongitude}, loadWeatherAndTweets);
         }
 
 
@@ -92,6 +45,41 @@
          *          PRIVATE FUNCTIONS           *
          ****************************************
          */
+
+        function loadWeatherAndTweets(results) {
+            if (results) {
+                const addressComponents = results[0].address_components;
+                const formattedAddress = results[0].formatted_address;
+                const coordinates = {
+                    latitude: results[0].geometry.location.lat(),
+                    longitude: results[0].geometry.location.lng()
+                };
+                let city;
+                for (const addressComponent of addressComponents) {
+                    if (addressComponent.types && addressComponent.types.indexOf('locality') > -1) {
+                        city = addressComponent.long_name;
+                        break;
+                    }
+                }
+
+                vm.selectedCity = {
+                    city: city,
+                    address: formattedAddress,
+                    coordinates: coordinates
+                };
+
+                const promises = [];
+                promises.push(weatherService.getWeather(coordinates.latitude, coordinates.longitude));
+                promises.push(twitterService.searchMeteoTweets(city));
+                Promise.all(promises).then(setWeatherAndTweets);
+            }
+        }
+
+        function setWeatherAndTweets(results) {
+            vm.selectedCity.weather = results[0].data;
+            vm.tweets = results[1].data.statuses;
+            $scope.$apply();
+        }
     }
 })();
 
