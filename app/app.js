@@ -7,17 +7,16 @@ const express = require('express'),
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/webContent'));
 
-const oauth2 = new OAuth2('SFAK2KhywMua3TWUv9yA1Emeg', 'pukTWW7SMkeJWaz95B8n2VBAytRcTKAxFIQC1lDMSXlbv44H0y', 'https://api.twitter.com/', null,
-    'oauth2/token', null);
-
+const TOKEN_A = 'SFAK2KhywMua3TWUv9yA1Emeg';
+const TOKEN_B = 'pukTWW7SMkeJWaz95B8n2VBAytRcTKAxFIQC1lDMSXlbv44H0y';
+const oauth2 = new OAuth2(TOKEN_A, TOKEN_B, 'https://api.twitter.com/', null, 'oauth2/token', null);
 let accessToken;
 
-oauth2.getOAuthAccessToken('', {
-    'grant_type': 'client_credentials'
-}, (e, access_token) => {
+const setAccessToken = (e, access_token) => {
     accessToken = access_token;
-});
+};
 
+oauth2.getOAuthAccessToken('', {'grant_type': 'client_credentials'}, setAccessToken);
 
 app.get('/getMeteoTweets', (req, res) => {
     const options = {

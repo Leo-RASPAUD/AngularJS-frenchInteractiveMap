@@ -2,10 +2,14 @@
     'use strict';
     angular.module('app.home').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['uiGmapGoogleMapApi', '$scope', 'twitterService'];
-    function HomeController(uiGmapGoogleMapApi, $scope, twitterService) {
+    HomeController.$inject = ['uiGmapGoogleMapApi', '$scope', 'twitterService', 'userWeather'];
+    function HomeController(uiGmapGoogleMapApi, $scope, twitterService, userWeather) {
         const vm = this;
         const init = () => {
+
+            vm.userWeather = userWeather.data;
+
+
             const toulouseCoordinates = {
                 latitude: 43.6047,
                 longitude: 1.442
@@ -14,7 +18,6 @@
                 click: clickMapEvent
             };
 
-            // http://api.openweathermap.org/data/2.5/weather?lat=43.6047&lon=1.442APPID=fcfa56ce32dfd331e9f46ff9a9906ee2
 
             vm.map = {
                 center: toulouseCoordinates,
@@ -70,7 +73,6 @@
 
                     twitterService.searchMeteoTweets(city).then(result => {
                         if (result.data) {
-                            console.log(result.data.statuses[0]);
                             vm.tweets = result.data.statuses;
                         }
                     });

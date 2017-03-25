@@ -9,6 +9,19 @@
     ></ui-gmap-google-map>
 </div>
 
+<md-card class="userWeatherCard">
+    <!--<img src="card-image.png" class="md-card-image" alt="image caption">-->
+    <md-card-content>
+        <h2>City</h2>
+        <div>
+            {{vm.userWeather}}
+        </div>
+    </md-card-content>
+    <md-card-footer>
+        Footer
+    </md-card-footer>
+</md-card>
+
 <div tweets hashtag="toulouse" button="true" count="15" refresh="15"/>
 
 <md-card class="selectedCityCard">
@@ -35,8 +48,7 @@
             <div>
                 <span ng-repeat="tag in tweet.entities.hashtags">{{tag.text}}</span>
             </div>
-            <div>{{tweet.text}}<span>
-            </div>
+            <div>{{tweet.text}}</div>
     </md-card-content>
     <md-card-footer>
         Footer

@@ -8,19 +8,10 @@
         vm.searchMeteoTweets = searchMeteoTweets;
 
         /**
-         * @name app.service:twitterService#showFilterInput
+         * @name app.service:twitterService#searchMeteoTweets
          */
         function searchMeteoTweets(city) {
             return $http.get(`/getMeteoTweets?city=${city}`);
         }
-
-
-        /*
-         ****************************************
-         *          PRIVATE FUNCTIONS           *
-         ****************************************
-         */
-
-
     }
 })();
