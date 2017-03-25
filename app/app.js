@@ -7,6 +7,8 @@ const express = require('express'),
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/webContent'));
 
+--app
+const port = process.env.PORT || 8080;
 const TOKEN_A = 'SFAK2KhywMua3TWUv9yA1Emeg';
 const TOKEN_B = 'pukTWW7SMkeJWaz95B8n2VBAytRcTKAxFIQC1lDMSXlbv44H0y';
 const oauth2 = new OAuth2(TOKEN_A, TOKEN_B, 'https://api.twitter.com/', null, 'oauth2/token', null);
@@ -38,4 +40,4 @@ app.get('/getMeteoTweets', (req, res) => {
     });
 });
 
-app.listen(8080);
+app.listen(port);
