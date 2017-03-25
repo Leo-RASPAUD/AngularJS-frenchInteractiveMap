@@ -4,7 +4,7 @@
   "description": "French interactive map",
   "main": "app.js",
   "scripts": {
-    "start": "node app/app.js",
+    "start": "npm install && bower install && node app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
