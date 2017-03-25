@@ -31,10 +31,12 @@
     <md-card-content>
         <h2>Tweet</h2>
         <div>
-            {{tweet.created_at}}<br/>
-            <span ng-repeat="tag in tweet.entities.hashtags">{{tag.text}}</span>
-            {{tweet.text}}
-        </div>
+            <div>{{tweet.created_at}}</div>
+            <div>
+                <span ng-repeat="tag in tweet.entities.hashtags">{{tag.text}}</span>
+            </div>
+            <div>{{tweet.text}}<span>
+            </div>
     </md-card-content>
     <md-card-footer>
         Footer
