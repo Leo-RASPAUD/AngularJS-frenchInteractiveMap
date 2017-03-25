@@ -24,7 +24,7 @@ oauth2.getOAuthAccessToken('', {'grant_type': 'client_credentials'}, setAccessTo
 app.get('/getMeteoTweets', (req, res) => {
     const options = {
         hostname: 'api.twitter.com',
-        path: `/1.1/search/tweets.json?q=%23meteo+%23${req.query.city}`,
+        path: `/1.1/search/tweets.json?q=%23meteo+%23${encodeURI(req.query.city)}`,
         headers: {
             Authorization: 'Bearer ' + accessToken
         }

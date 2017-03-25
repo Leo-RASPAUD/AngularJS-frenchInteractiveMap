@@ -1,58 +1,87 @@
-<div>
-    Interactive french map
-</div>
-<div style="width : 800px;height: 400px;">
-    <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events"></ui-gmap-google-map>
-</div>
+<div class="content">
 
-<md-card class="userWeatherCard">
-    <!--<img src="card-image.png" class="md-card-image" alt="image caption">-->
-    <md-card-content>
-        <h2>{{vm.userWeather.name}}<img src="http://openweathermap.org/img/w/{{vm.userWeather.weather[0].icon}}.png"></h2>
-        <div>
-            <div>
-                <span></span>
-            </div>
-            <div>
-                Cloudiness (%) : {{vm.userWeather.clouds.all}}
-            </div>
-            <div>Weather : {{vm.userWeather.weather[0].description}}</div>
-            <div>Temperature : {{vm.userWeather.main.temp}}</div>
+    <h2 class="title">
+        Interactive meteo map
+    </h2>
+
+    <div class="layout-row">
+        <div flex>
+            <md-card class="userWeatherCard">
+                <md-card-content>
+                    <h2>{{vm.userWeather.name}}<img src="http://openweathermap.org/img/w/{{vm.userWeather.weather[0].icon}}.png"></h2>
+                    <div>
+                        <div>
+                            <span></span>
+                        </div>
+                        <div>
+                            Cloudiness (%) : {{vm.userWeather.clouds.all}}
+                        </div>
+                        <div>Weather : {{vm.userWeather.weather[0].description}}</div>
+                        <div>Temperature : {{vm.userWeather.main.temp}}</div>
+
+                    </div>
+                </md-card-content>
+                <md-card-footer>
+                    Footer
+                </md-card-footer>
+            </md-card>
+
+            <md-card class="userWeatherCard" ng-repeat="city in vm.biggestCitiesWeather">
+                <md-card-content>
+                    <h2>{{city.name}}<img src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png"></h2>
+                    <div>
+                        <div>
+                            <span></span>
+                        </div>
+                        <div>
+                            Cloudiness (%) : {{city.clouds.all}}
+                        </div>
+                        <div>Weather : {{city.weather[0].description}}</div>
+                        <div>Temperature : {{city.main.temp}}</div>
+
+                    </div>
+                </md-card-content>
+                <md-card-footer>
+                    Footer
+                </md-card-footer>
+            </md-card>
+
 
         </div>
-    </md-card-content>
-    <md-card-footer>
-        Footer
-    </md-card-footer>
-</md-card>
-
-<div tweets hashtag="toulouse" button="true" count="15" refresh="15"/>
-
-<md-card class="selectedCityCard">
-    <md-card-content>
-        <h2>City</h2>
-        <div>
-            City : {{vm.selectedCity.city}}<br/>
-            Address : {{vm.selectedCity.address}}<br/>
-            Coordinates : {{vm.selectedCity.coordinates}}
+        <div flex class="width-100">
+            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events"></ui-gmap-google-map>
         </div>
-    </md-card-content>
-    <md-card-footer>
-        Footer
-    </md-card-footer>
-</md-card>
+        <div flex>
+            <md-card class="selectedCityCard">
+                <md-card-content>
+                    <h2>City</h2>
+                    <div>
+                        City : {{vm.selectedCity.city}}<br/>
+                        Address : {{vm.selectedCity.address}}<br/>
+                        Coordinates : {{vm.selectedCity.coordinates}}
+                    </div>
+                </md-card-content>
+                <md-card-footer>
+                    Footer
+                </md-card-footer>
+            </md-card>
+            <md-card class="tweetCards" ng-repeat="tweet in vm.tweets | limitTo : 5">
+                <md-card-content>
+                    <h2>Tweet</h2>
+                    <div>
+                        <div>{{tweet.created_at}}</div>
+                        <div>
+                            <span ng-repeat="tag in tweet.entities.hashtags">#{{tag.text}}</span>
+                        </div>
+                        <div>{{tweet.text}}</div>
+                    </div>
+                </md-card-content>
+                <md-card-footer>
+                    Footer
+                </md-card-footer>
+            </md-card>
+        </div>
+    </div>
 
-<md-card class="tweetCards" ng-repeat="tweet in vm.tweets | limitTo : 5">
-    <md-card-content>
-        <h2>Tweet</h2>
-        <div>
-            <div>{{tweet.created_at}}</div>
-            <div>
-                <span ng-repeat="tag in tweet.entities.hashtags">#{{tag.text}}</span>
-            </div>
-            <div>{{tweet.text}}</div>
-    </md-card-content>
-    <md-card-footer>
-        Footer
-    </md-card-footer>
-</md-card>
+
+</div>

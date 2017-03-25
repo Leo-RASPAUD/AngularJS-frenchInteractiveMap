@@ -8,8 +8,7 @@
         const vm = this;
         const init = () => {
 
-            console.log(biggestCitiesWeather);
-
+            vm.biggestCitiesWeather = biggestCitiesWeather.map(city => city.data);
             vm.userWeather = userWeather.data;
             vm.googleMap = googleMap;
 
