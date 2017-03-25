@@ -1,7 +1,7 @@
 const express = require('express'),
     path = require('path'),
     https = require('https'),
-    OAuth2 = require('OAuth').OAuth2,
+    OAuth2 = require('oauth').OAuth2,
     app = express();
 
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
