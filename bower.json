@@ -1,0 +1,24 @@
+{
+  "name": "french-interactive-map",
+  "description": "French interactive map",
+  "main": "app.js",
+  "authors": [
+    "Léo RASPAUD"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Leo-RASPAUD/frenchInteractiveMap",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-google-maps": "^2.4.1",
+    "angular-material": "^1.1.3",
+    "angular-ui-router": "^0.4.2",
+    "angular": "^1.6.3"
+  }
+}

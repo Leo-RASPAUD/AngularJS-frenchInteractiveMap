@@ -1,0 +1,13 @@
+.angular-google-map-container {
+  height: 400px;
+}
+
+.selectedCityCard {
+  width: 600px;
+  height: 200px;
+}
+
+.tweetCards {
+  width: 400px;
+  height: 200px;
+}

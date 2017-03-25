@@ -4,6 +4,7 @@
   "description": "French interactive map",
   "main": "app.js",
   "scripts": {
+    "start": "node app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +24,8 @@
   },
   "dependencies": {
     "bower": "^1.8.0",
-    "gulp": "^3.9.1"
+    "express": "^4.15.2",
+    "gulp": "^3.9.1",
+    "oauth": "^0.9.15"
   }
 }
-vi
