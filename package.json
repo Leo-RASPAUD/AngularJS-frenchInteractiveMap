@@ -1,0 +1,29 @@
+{
+  "name": "french-interactive-map",
+  "version": "1.0.0",
+  "description": "French interactive map",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leo-RASPAUD/frenchInteractiveMap.git"
+  },
+  "author": "Léo RASPAUD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leo-RASPAUD/frenchInteractiveMap/issues"
+  },
+  "homepage": "https://github.com/Leo-RASPAUD/frenchInteractiveMap#readme",
+  "devDependencies": {
+    "gulp-connect": "^5.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-serve": "^1.4.0"
+  },
+  "dependencies": {
+    "bower": "^1.8.0",
+    "gulp": "^3.9.1"
+  }
+}
+vi
