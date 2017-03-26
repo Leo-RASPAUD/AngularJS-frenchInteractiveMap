@@ -9,7 +9,7 @@
                   ng-if="vm.city.isHome || vm.city.isSelectedCity"
                   ng-class="{'fa-home' : vm.city.isHome, 'fa-bullseye red' : vm.city.isSelectedCity}"></span>
 
-            <img src="{{vm.city.iconUrl}}" style="height:30px; width:30px;"/>
+            <img src="{{vm.city.iconUrl}}" class="weatherSmallIcon"/>
             <span class="cityName text-ellipsis" title="{{vm.city.name}}">{{vm.city.name}}</span>
         </div>
         <span class="updateTime">

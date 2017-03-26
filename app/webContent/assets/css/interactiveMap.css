@@ -26,6 +26,11 @@ body {
 }
 
 /* Weather cards */
+.weatherSmallIcon {
+  height: 30px;
+  width: 30px;
+}
+
 .contextIcon {
   float: left;
   padding-top: 2px;

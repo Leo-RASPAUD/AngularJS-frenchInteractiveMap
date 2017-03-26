@@ -3,8 +3,8 @@
     angular.module('app.home').controller('HomeController', HomeController);
 
     HomeController.$inject =
-        ['googleMap', '$scope', 'twitterService', 'userWeather', 'weatherService', 'toulouseCoordinates', 'biggestCitiesWeather', 'parisTweets'];
-    function HomeController(googleMap, $scope, twitterService, userWeather, weatherService, toulouseCoordinates, biggestCitiesWeather, parisTweets) {
+        ['googleMap', '$scope', 'twitterService', 'userWeather', 'weatherService', 'biggestCitiesWeather', 'parisTweets'];
+    function HomeController(googleMap, $scope, twitterService, userWeather, weatherService, biggestCitiesWeather, parisTweets) {
         const vm = this;
         const init = () => {
 
@@ -21,7 +21,7 @@
             };
 
             vm.map = {
-                center: toulouseCoordinates,
+                center: {latitude: '48.8511618571692', longitude: '2.357940673828125'},
                 zoom: 8,
                 events: events
             };
