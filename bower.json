@@ -1,6 +1,7 @@
 {
   "description": "French interactive map",
   "main": "app.js",
+  "name" : "frenchInteractiveMap",
   "authors": [
     "Léo RASPAUD"
   ],
