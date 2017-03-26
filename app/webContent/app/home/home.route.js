@@ -12,11 +12,17 @@
                     userInformation: getUserInformation,
                     userWeather: getUserWeather,
                     googleMap: getGoogleMap,
-                    biggestCitiesWeather: getBiggestCitiesWeather
+                    biggestCitiesWeather: getBiggestCitiesWeather,
+                    parisTweets: getParisTweets
                 },
                 controller: 'HomeController',
                 controllerAs: 'vm'
             });
+    }
+
+    getParisTweets.$inject = ['twitterService'];
+    function getParisTweets(twitterService) {
+        return twitterService.searchMeteoTweets('Paris');
     }
 
     getGoogleMap.$inject = ['uiGmapGoogleMapApi'];
@@ -46,7 +52,6 @@
         promises.push(weatherService.getWeather(biggestFrenchCities[1].latitude, biggestFrenchCities[1].longitude));
         promises.push(weatherService.getWeather(biggestFrenchCities[2].latitude, biggestFrenchCities[2].longitude));
         promises.push(weatherService.getWeather(biggestFrenchCities[3].latitude, biggestFrenchCities[3].longitude));
-        promises.push(weatherService.getWeather(biggestFrenchCities[4].latitude, biggestFrenchCities[4].longitude));
         return Promise.all(promises);
     }
 

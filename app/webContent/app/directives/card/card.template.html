@@ -1,0 +1,27 @@
+<div class="card layout-column noCitySelected" ng-if="!vm.city">
+    Select a city to display information.
+</div>
+
+<div class="card layout-column" ng-if="vm.city">
+    <div class="cardHeader layout-row layout-align-space-around-center">
+        <div>
+            <span class="contextIcon fa-lg fa"
+                  ng-if="vm.city.isHome || vm.city.isSelectedCity"
+                  ng-class="{'fa-home' : vm.city.isHome, 'fa-bullseye red' : vm.city.isSelectedCity}"></span>
+
+            <img src="{{vm.city.iconUrl}}" style="height:30px; width:30px;"/>
+            <span class="cityName text-ellipsis" title="{{vm.city.name}}">{{vm.city.name}}</span>
+        </div>
+        <span class="updateTime">
+            <span class="fa fa-clock-o"></span>
+            <span>{{vm.city.formattedTime}}</span>
+        </span>
+    </div>
+    <div class="weatherCardContent layout-row layout-align-space-around-center">
+        <div>
+            <span class="fa fa-cloud"></span><span> {{vm.city.clouds.all}}%</span>
+            <span class="fa-thermometer-full fa"></span><span> {{vm.city.main.temp}}°C</span>
+        </div>
+        <div class="weatherDescription text-ellipsis" title="{{vm.city.weather[0].description}}">{{vm.city.weather[0].description}}</div>
+    </div>
+</div>

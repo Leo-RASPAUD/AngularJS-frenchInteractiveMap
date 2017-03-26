@@ -7,9 +7,6 @@
         const vm = this;
         vm.searchMeteoTweets = searchMeteoTweets;
 
-        /**
-         * @name app.service:twitterService#searchMeteoTweets
-         */
         function searchMeteoTweets(city) {
             return $http.get(`/getMeteoTweets?city=${city}`);
         }

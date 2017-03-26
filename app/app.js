@@ -22,9 +22,10 @@ const setAccessToken = (e, access_token) => {
 oauth2.getOAuthAccessToken('', {'grant_type': 'client_credentials'}, setAccessToken);
 
 app.get('/getMeteoTweets', (req, res) => {
+    req.query.city = req.query.city.replace(/\s/g, '');
     const options = {
         hostname: 'api.twitter.com',
-        path: `/1.1/search/tweets.json?q=%23meteo+%23${encodeURI(req.query.city)}`,
+        path: `/1.1/search/tweets.json?q=%23${encodeURI(req.query.city)}+%23meteo`,
         headers: {
             Authorization: 'Bearer ' + accessToken
         }

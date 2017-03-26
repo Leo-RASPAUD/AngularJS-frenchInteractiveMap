@@ -5,7 +5,8 @@
     route.$inject = ['$urlRouterProvider'];
     function route($urlRouterProvider) {
         $urlRouterProvider
-            .when('', '/home')
+            .when('', '/')
+            .when('/', '/home')
             .otherwise('');
     }
 })();
