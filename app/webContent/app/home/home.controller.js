@@ -10,7 +10,9 @@
 
             vm.biggestCitiesWeather = biggestCitiesWeather.map(cityWeather => cityWeather.data);
             vm.userWeather = userWeather.data;
-            vm.userWeather.isHome = true;
+            if (vm.userWeather) {
+                vm.userWeather.isHome = true;
+            }
             vm.googleMap = googleMap;
             vm.tweets = parisTweets.data.statuses;
 
